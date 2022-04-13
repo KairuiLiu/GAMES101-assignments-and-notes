@@ -23,10 +23,16 @@ Eigen::Matrix4f get_model_matrix(float rotation_angle)
 {
     Eigen::Matrix4f model = Eigen::Matrix4f::Identity();
 
-    // TODO: Implement this function
-    // Create the model matrix for rotating the triangle around the Z axis.
+    // 📖-1 Create the model matrix for rotating the triangle around the Z axis.
     // Then return it.
-
+    // | cosx -sinx  0  0 |
+    // | sinx  cosx  0  0 |
+    // |    0     0  1  0 |
+    // |    0     0  0  1 |
+    const float angle = rotation_angle / 180 * MY_PI;
+    const float cosx = std::cos(angle);
+    const float sinx = std::sin(angle);
+    model << cosx, -sinx, 0.0, 0.0, sinx, cosx, 0.0, 0.0, 0.0 ,0.0 ,1.0, 0.0, 0.0, 0.0, 0.0, 1.0; 
     return model;
 }
 
@@ -37,11 +43,36 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio,
 
     Eigen::Matrix4f projection = Eigen::Matrix4f::Identity();
 
-    // TODO: Implement this function
-    // Create the projection matrix for the given parameters.
+    // 📖-2 Create the projection matrix for the given parameters.
     // Then return it.
-
+    // | n  0    0    0 |
+    // | 0  n    0    0 |
+    // | 0  0  n+f  -nf |
+    // | 0  0    0    1 |
+    projection << zNear, 0.0, 0.0, 0.0, 0.0, zNear, 0.0, 0.0, 0.0 ,0.0 , zNear+zFar, -zNear*zFar, 0.0, 0.0, 0.0, 1.0; 
     return projection;
+}
+
+Eigen::Matrix4f getCrossProductMatrix4(Vector4f v){
+    // 📖-3 create a function to get cross product matrix
+    Eigen::Matrix4f crossMatrix;
+    crossMatrix <<  0.0,   -v[2],  v[1],  0.0, 
+                    v[2],  0.0,    -v[0], 0.0, 
+                    -v[1], v[0],   0.0,   0.0,
+                    0.0,   0.0,    0.0,   0.0;
+    return crossMatrix;
+}
+
+Eigen::Matrix4f get_rotation(Vector3f axis = Eigen::Vector3f(0.0,0.0,1.0), float angle = 0){
+    // 📖-4 create a the rotation transformation matrix around any axis passing through the origin
+    // R(n,a) = cos(a) I + (1-cos(a))nnT + sin(a)[cross]
+    const Eigen::Vector4f axis4 = Eigen::Vector4f(axis[0],axis[1],axis[2],0.0);
+    const float radianAngle = angle / 180.0 * MY_PI;
+    const float cosa = std::cos(radianAngle);
+    const float sina = std::sin(radianAngle);
+    Eigen::Matrix4f rotation = cosa * Eigen::Matrix4f::Identity() + (1-cosa) * axis4 * axis4.transpose() + sina * getCrossProductMatrix4(axis4);
+    rotation(3,3) = 1.0;
+    return rotation;
 }
 
 int main(int argc, const char** argv)
@@ -49,6 +80,8 @@ int main(int argc, const char** argv)
     float angle = 0;
     bool command_line = false;
     std::string filename = "output.png";
+    // 📖-5 the axis we want to rotate
+    Eigen::Vector3f axis(0.0, 0.0, -1.0);
 
     if (argc >= 3) {
         command_line = true;
@@ -91,7 +124,9 @@ int main(int argc, const char** argv)
     while (key != 27) {
         r.clear(rst::Buffers::Color | rst::Buffers::Depth);
 
-        r.set_model(get_model_matrix(angle));
+        // 📖-6 replace the model matrix with rotation matrix
+        // r.set_model(get_model_matrix(angle));
+        r.set_model(get_rotation(axis, angle));
         r.set_view(get_view_matrix(eye_pos));
         r.set_projection(get_projection_matrix(45, 1, 0.1, 50));
 
@@ -109,6 +144,14 @@ int main(int argc, const char** argv)
         }
         else if (key == 'd') {
             angle -= 10;
+        }
+        // 📖-7 use 's' to reset the axis we want to rotate with 
+        else if (key == 's') {
+            float x, y, z;
+            std::cout<< "input the new axis: \n > ";
+            std::cin >> x >> y >> z;
+            axis = Eigen::Vector3f(x,y,z);
+            angle = 0;
         }
     }
 
