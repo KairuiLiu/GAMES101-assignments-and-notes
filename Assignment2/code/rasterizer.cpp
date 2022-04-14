@@ -132,40 +132,40 @@ void rst::rasterizer::rasterize_triangle(const Triangle& t) {
 
     // 📖-4 calc the deepth, maintain z buffer array .
 
-    for(float x = std::floor(lf); x< std::ceil(rt);x+=1.0){
-        for(float y = std::floor(bt); y< std::ceil(tp);y+=1.0){
-            if(insideTriangle(x,y, t.v)){
-                const float deep = depth_buf[get_index(x,y)];
-                auto[alpha, beta, gamma] = computeBarycentric2D(x, y, t.v);
-                float w_reciprocal = 1.0/(alpha / v[0].w() + beta / v[1].w() + gamma / v[2].w());
-                float z_interpolated = alpha * v[0].z() / v[0].w() + beta * v[1].z() / v[1].w() + gamma * v[2].z() / v[2].w();
-                z_interpolated *= w_reciprocal;
-                if(z_interpolated < deep) {
-                    depth_buf[get_index(x,y)] = z_interpolated;
-                    set_pixel(Eigen::Vector3f(x,y,1), t.getColor());
-                }
-            }
-        }
-    }
-
-    // 📖-5 Fake SSAA 2*2.
     // for(float x = std::floor(lf); x< std::ceil(rt);x+=1.0){
     //     for(float y = std::floor(bt); y< std::ceil(tp);y+=1.0){
-    //         const float deep = depth_buf[get_index(x,y)];
-    //         auto[alpha, beta, gamma] = computeBarycentric2D(x, y, t.v);
-    //         float w_reciprocal = 1.0/(alpha / v[0].w() + beta / v[1].w() + gamma / v[2].w());
-    //         float z_interpolated = alpha * v[0].z() / v[0].w() + beta * v[1].z() / v[1].w() + gamma * v[2].z() / v[2].w();
-    //         z_interpolated *= w_reciprocal;
-    //         if(z_interpolated < deep) {
-    //             depth_buf[get_index(x,y)] = z_interpolated;
-    //             float in = 0;
-    //             for(float delx = 0.25; delx<=1.0; delx+=0.5)
-    //             for(float dely = 0.25; dely<=1.0; dely+=0.5)
-    //             if(insideTriangle(x+delx,y+dely, t.v))in+=0.25;
-    //             set_pixel(Eigen::Vector3f(x,y,1), t.getColor()*in + get_pixel(Eigen::Vector3f(x,y,1))*(1-in));
+    //         if(insideTriangle(x,y, t.v)){
+    //             const float deep = depth_buf[get_index(x,y)];
+    //             auto[alpha, beta, gamma] = computeBarycentric2D(x, y, t.v);
+    //             float w_reciprocal = 1.0/(alpha / v[0].w() + beta / v[1].w() + gamma / v[2].w());
+    //             float z_interpolated = alpha * v[0].z() / v[0].w() + beta * v[1].z() / v[1].w() + gamma * v[2].z() / v[2].w();
+    //             z_interpolated *= w_reciprocal;
+    //             if(z_interpolated < deep) {
+    //                 depth_buf[get_index(x,y)] = z_interpolated;
+    //                 set_pixel(Eigen::Vector3f(x,y,1), t.getColor());
+    //             }
     //         }
     //     }
     // }
+
+    // 📖-5 Fake SSAA 2*2.
+    for(float x = std::floor(lf); x< std::ceil(rt);x+=1.0){
+        for(float y = std::floor(bt); y< std::ceil(tp);y+=1.0){
+            const float deep = depth_buf[get_index(x,y)];
+            auto[alpha, beta, gamma] = computeBarycentric2D(x, y, t.v);
+            float w_reciprocal = 1.0/(alpha / v[0].w() + beta / v[1].w() + gamma / v[2].w());
+            float z_interpolated = alpha * v[0].z() / v[0].w() + beta * v[1].z() / v[1].w() + gamma * v[2].z() / v[2].w();
+            z_interpolated *= w_reciprocal;
+            if(z_interpolated < deep) {
+                depth_buf[get_index(x,y)] = z_interpolated;
+                float in = 0;
+                for(float delx = 0.25; delx<=1.0; delx+=0.5)
+                for(float dely = 0.25; dely<=1.0; dely+=0.5)
+                if(insideTriangle(x+delx,y+dely, t.v))in+=0.25;
+                set_pixel(Eigen::Vector3f(x,y,1), t.getColor()*in + get_pixel(Eigen::Vector3f(x,y,1))*(1-in));
+            }
+        }
+    }
 
     // TODO : set the current pixel (use the set_pixel function) to the color of the triangle (use getColor function) if it should be painted.
 }
