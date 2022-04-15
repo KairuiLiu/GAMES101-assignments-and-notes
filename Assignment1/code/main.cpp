@@ -41,7 +41,9 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio,
 {
     // Students will implement this function
 
-    Eigen::Matrix4f projection = Eigen::Matrix4f::Identity();
+    Eigen::Matrix4f Mortho1;
+    Eigen::Matrix4f Mortho2;
+    Eigen::Matrix4f Mpersptoortho;
 
     // 📖-2 Create the projection matrix for the given parameters.
     // Then return it.
@@ -49,8 +51,21 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio,
     // | 0  n    0    0 |
     // | 0  0  n+f  -nf |
     // | 0  0    0    1 |
-    projection << zNear, 0.0, 0.0, 0.0, 0.0, zNear, 0.0, 0.0, 0.0 ,0.0 , zNear+zFar, -zNear*zFar, 0.0, 0.0, 0.0, 1.0; 
-    return projection;
+    float top = -std::abs(zNear) * std::tan(eye_fov / 2 / 180 * MY_PI);
+    const float right = top * aspect_ratio;
+    Mortho1 << 1/right, 0, 0, 0,
+                0, 1/top, 0, 0,
+                0, 0, 1/(zNear-zFar), 0,
+                0, 0, 0, 1;
+    Mortho2 << 1, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1, -(zNear+zFar)/2,
+                0, 0, 0, 1;
+    Mpersptoortho << zNear, 0.0, 0.0, 0.0,
+                    0.0, zNear, 0.0, 0.0, 
+                    0.0 ,0.0 , zNear+zFar, -zNear*zFar, 
+                    0.0, 0.0, 1.0, 0.0; 
+    return Mortho1 * Mortho2 * Mpersptoortho;
 }
 
 Eigen::Matrix4f getCrossProductMatrix4(Vector4f v){

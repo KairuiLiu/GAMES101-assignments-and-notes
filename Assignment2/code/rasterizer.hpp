@@ -94,6 +94,8 @@ namespace rst
         std::vector<Eigen::Vector3f> frame_buf;
 
         std::vector<float> depth_buf;
+        std::vector<float> depth_buf2;
+        std::vector<Eigen::Vector3f> col_buf2;
         int get_index(int x, int y);
 
         int width, height;
