@@ -1,4 +1,4 @@
-## Lecture 5 光栅化-三角形
+## Lecture 5 Rasterization - 三角形
 
 完成变换之后, 我们将物体缩放到了一个$[-1,1]^3$的正则Cube中, 之后需要将其光栅化(Rasterize)到屏幕(Raster)上
 
