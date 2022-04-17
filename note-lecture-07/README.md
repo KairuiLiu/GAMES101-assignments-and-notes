@@ -1,4 +1,4 @@
-## Lecture 7 Shading - 着色
+## Lecture 7 Shading
 
 着色就是对不同的物体应用不同材质的过程
 
