@@ -1,4 +1,4 @@
-## Lecture 3 Transformation -模型变换
+## Lecture 3 Transformation - 模型变换
 
 两种变换:
 
