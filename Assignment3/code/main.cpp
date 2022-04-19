@@ -8,6 +8,9 @@
 #include "Texture.hpp"
 #include "OBJ_Loader.h"
 
+// 📖-2 max经常报错, 自己实现一下
+#define MYMAX(X,Y) (X>Y?X:Y)
+
 Eigen::Matrix4f get_view_matrix(Eigen::Vector3f eye_pos)
 {
     Eigen::Matrix4f view = Eigen::Matrix4f::Identity();
@@ -49,8 +52,27 @@ Eigen::Matrix4f get_model_matrix(float angle)
 
 Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio, float zNear, float zFar)
 {
-    // TODO: Use the same projection matrix from the previous assignments
+    // 📖-3 将之前的投影函数复制过来
 
+    Eigen::Matrix4f Mortho1;
+    Eigen::Matrix4f Mortho2;
+    Eigen::Matrix4f Mpersptoortho;
+
+    float top = -std::abs(zNear) * std::tan(eye_fov / 2 / 180 * MY_PI);
+    const float right = top * aspect_ratio;
+    Mortho1 << 1/right, 0, 0, 0,
+                0, 1/top, 0, 0,
+                0, 0, 1/(zNear-zFar), 0,
+                0, 0, 0, 1;
+    Mortho2 << 1, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1, -(zNear+zFar)/2,
+                0, 0, 0, 1;
+    Mpersptoortho << zNear, 0.0, 0.0, 0.0,
+                    0.0, zNear, 0.0, 0.0, 
+                    0.0 ,0.0 , zNear+zFar, -zNear*zFar, 
+                    0.0, 0.0, 1.0, 0.0; 
+    return Mortho1 * Mortho2 * Mpersptoortho;
 }
 
 Eigen::Vector3f vertex_shader(const vertex_shader_payload& payload)
@@ -83,8 +105,10 @@ Eigen::Vector3f texture_fragment_shader(const fragment_shader_payload& payload)
     Eigen::Vector3f return_color = {0, 0, 0};
     if (payload.texture)
     {
-        // TODO: Get the texture value at the texture coordinates of the current fragment
-
+        // 📖-5 获取纹理上的颜色
+        return_color = payload.texture->getColor(payload.tex_coords[0], payload.tex_coords[1]);
+        // 📖-11 使用双线性插值获取颜色
+        // return_color = payload.texture->getColorBilinear(payload.tex_coords[0], payload.tex_coords[1]);
     }
     Eigen::Vector3f texture_color;
     texture_color << return_color.x(), return_color.y(), return_color.z();
@@ -110,8 +134,19 @@ Eigen::Vector3f texture_fragment_shader(const fragment_shader_payload& payload)
 
     for (auto& light : lights)
     {
-        // TODO: For each light source in the code, calculate what the *ambient*, *diffuse*, and *specular* 
+        // 📖-6 把布林冯模型拷过来
         // components are. Then, accumulate that result on the *result_color* object.
+        auto VlightIn = (light.position - point).normalized();
+        auto VlightView = (eye_pos - point).normalized();
+        auto Vhalf = (VlightIn + VlightView).normalized();
+        auto r2lightIn = (light.position - point).norm() * (light.position - point).norm();
+        // float lightIntensity = std::sqrt(light.intensity * light.intensity);
+
+        result_color += Eigen::Vector3f{ka[0]*amb_light_intensity[0],ka[1]*amb_light_intensity[1],ka[2]*amb_light_intensity[2]};
+        
+        result_color += Eigen::Vector3f{kd[0]*light.intensity[0],kd[1]*light.intensity[1],kd[2]*light.intensity[2]} / r2lightIn * MYMAX(0,normal.dot(VlightIn));
+
+        result_color += Eigen::Vector3f{ks[0]*light.intensity[0],ks[1]*light.intensity[1],ks[2]*light.intensity[2]} / r2lightIn * std::pow(MYMAX(0,normal.dot(Vhalf)), p);
 
     }
 
@@ -140,9 +175,18 @@ Eigen::Vector3f phong_fragment_shader(const fragment_shader_payload& payload)
     Eigen::Vector3f result_color = {0, 0, 0};
     for (auto& light : lights)
     {
-        // TODO: For each light source in the code, calculate what the *ambient*, *diffuse*, and *specular* 
+        // 📖-4 补全布林冯模型: 计算l, v, h向量并返回颜色
         // components are. Then, accumulate that result on the *result_color* object.
+        auto VlightIn = (light.position - point).normalized();
+        auto VlightView = (eye_pos - point).normalized();
+        auto Vhalf = (VlightIn + VlightView).normalized();
+        auto r2lightIn = (light.position - point).norm() * (light.position - point).norm();
+        // float lightIntensity = std::sqrt(light.intensity * light.intensity);
+        result_color += Eigen::Vector3f{ka[0]*amb_light_intensity[0],ka[1]*amb_light_intensity[1],ka[2]*amb_light_intensity[2]};
         
+        result_color += Eigen::Vector3f{kd[0]*light.intensity[0],kd[1]*light.intensity[1],kd[2]*light.intensity[2]} / r2lightIn * MYMAX(0,normal.dot(VlightIn));
+
+        result_color += Eigen::Vector3f{ks[0]*light.intensity[0],ks[1]*light.intensity[1],ks[2]*light.intensity[2]} / r2lightIn * std::pow(MYMAX(0,normal.dot(Vhalf)), p);
     }
 
     return result_color * 255.f;
@@ -172,25 +216,51 @@ Eigen::Vector3f displacement_fragment_shader(const fragment_shader_payload& payl
 
     float kh = 0.2, kn = 0.1;
     
-    // TODO: Implement displacement mapping here
+    // 📖-8 计算位移后的法向量
     // Let n = normal = (x, y, z)
+    auto x = normal.x();
+    auto y = normal.y();
+    auto z = normal.z();
+    auto u = payload.tex_coords[0];
+    auto v = payload.tex_coords[1];
+    auto w = payload.texture->width;
+    auto h = payload.texture->height;
     // Vector t = (x*y/sqrt(x*x+z*z),sqrt(x*x+z*z),z*y/sqrt(x*x+z*z))
+    Eigen::Vector3f t = {x*y/std::sqrt(x*x+z*z),std::sqrt(x*x+z*z),z*y/std::sqrt(x*x+z*z)};
     // Vector b = n cross product t
+    auto b = normal.cross(t);
     // Matrix TBN = [t b n]
+    Eigen::Matrix3f TBN;
+    TBN << t, b, normal;
     // dU = kh * kn * (h(u+1/w,v)-h(u,v))
     // dV = kh * kn * (h(u,v+1/h)-h(u,v))
+    auto dU = kh * kn * (payload.texture->getColor(u+1.0/w,v).norm()-payload.texture->getColor(u,v).norm());
+    auto dV = kh * kn * (payload.texture->getColor(u,v+1/h).norm()-payload.texture->getColor(u,v).norm());
     // Vector ln = (-dU, -dV, 1)
+    Eigen::Vector3f ln(-dU,-dV,1);
     // Position p = p + kn * n * h(u,v)
+    point = point + kn * normal * payload.texture->getColor(u,v).norm();
     // Normal n = normalize(TBN * ln)
+    normal = (TBN * ln).normalized();
 
 
     Eigen::Vector3f result_color = {0, 0, 0};
 
-    for (auto& light : lights)
+        for (auto& light : lights)
     {
-        // TODO: For each light source in the code, calculate what the *ambient*, *diffuse*, and *specular* 
+        // 📖-9 把布林冯模型拷过来
         // components are. Then, accumulate that result on the *result_color* object.
+        auto VlightIn = (light.position - point).normalized();
+        auto VlightView = (eye_pos - point).normalized();
+        auto Vhalf = (VlightIn + VlightView).normalized();
+        auto r2lightIn = (light.position - point).norm() * (light.position - point).norm();
+        // float lightIntensity = std::sqrt(light.intensity * light.intensity);
 
+        result_color += Eigen::Vector3f{ka[0]*amb_light_intensity[0],ka[1]*amb_light_intensity[1],ka[2]*amb_light_intensity[2]};
+        
+        result_color += Eigen::Vector3f{kd[0]*light.intensity[0],kd[1]*light.intensity[1],kd[2]*light.intensity[2]} / r2lightIn * MYMAX(0,normal.dot(VlightIn));
+
+        result_color += Eigen::Vector3f{ks[0]*light.intensity[0],ks[1]*light.intensity[1],ks[2]*light.intensity[2]} / r2lightIn * std::pow(MYMAX(0,normal.dot(Vhalf)), p);
 
     }
 
@@ -221,19 +291,31 @@ Eigen::Vector3f bump_fragment_shader(const fragment_shader_payload& payload)
 
     float kh = 0.2, kn = 0.1;
 
-    // TODO: Implement bump mapping here
+    // 📖-7 计算凹凸后的法向量
     // Let n = normal = (x, y, z)
+    auto x = normal.x();
+    auto y = normal.y();
+    auto z = normal.z();
+    auto u = payload.tex_coords[0];
+    auto v = payload.tex_coords[1];
+    auto w = payload.texture->width;
+    auto h = payload.texture->height;
     // Vector t = (x*y/sqrt(x*x+z*z),sqrt(x*x+z*z),z*y/sqrt(x*x+z*z))
+    Eigen::Vector3f t = {x*y/std::sqrt(x*x+z*z),std::sqrt(x*x+z*z),z*y/std::sqrt(x*x+z*z)};
     // Vector b = n cross product t
+    auto b = normal.cross(t);
     // Matrix TBN = [t b n]
-    // dU = kh * kn * (h(u+1/w,v)-h(u,v))
-    // dV = kh * kn * (h(u,v+1/h)-h(u,v))
-    // Vector ln = (-dU, -dV, 1)
-    // Normal n = normalize(TBN * ln)
+    Eigen::Matrix3f TBN;
+    TBN << t, b, normal;
 
+    auto dU = kh * kn * (payload.texture->getColor(u+1.0/w,v).norm()-payload.texture->getColor(u,v).norm());
+    auto dV = kh * kn * (payload.texture->getColor(u,v+1/h).norm()-payload.texture->getColor(u,v).norm());
+
+    Eigen::Vector3f ln(-dU,-dV,1);
+    auto n = (TBN * ln).normalized();
 
     Eigen::Vector3f result_color = {0, 0, 0};
-    result_color = normal;
+    result_color = n;
 
     return result_color * 255.f;
 }

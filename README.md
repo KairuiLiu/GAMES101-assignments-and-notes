@@ -65,7 +65,47 @@ B 站回放: https://www.bilibili.com/video/BV1X7411F744
 
     ![2x2超采样放大256%](./Assignment2/result/SSAA2x2@256.png)
 
-- [ ] [Assignment 3 实现纹理](./Assignment3)
+- [x] [Assignment 3 实现纹理](./Assignment3)
+
+    - 直接渲染
+
+      ![直接渲染](./Assignment3/result/normal.png)
+
+    - 使用Blinn-Phong模型渲染
+
+      ![Blinn-Phong](./Assignment3/result/phong.png)
+
+    - 纹理贴图
+
+      ![凹凸贴图纹理贴图](./Assignment3/result/texture.png)
+
+    - 凹凸贴图
+
+      ![凹凸贴图](./Assignment3/result/bump.png)
+
+    - 位移贴图
+
+      ![位移贴图](./Assignment3/result/displacement.png)
+
+    - 渲染一个立方体-Blinn-Phong模型
+
+      ![立方体-Blinn-Phong](./Assignment3/result/Crate-Phong.png)
+
+    - 渲染一个立方体-纹理贴图
+
+      ![立方体-纹理贴图](./Assignment3/result/Crate-texture.png)
+
+    - 不使用双线性插值渲染牛(使用$521\times 521$纹理)
+
+      ![不使用双线性插值](./Assignment3/result/no-Bilinear.png)
+
+    - 使用双线性插值渲染牛(使用$521\times 521$纹理)
+
+      ![使用双线性插值](./Assignment3/result/Bilinear.png)
+
+    - 两者差别
+
+      ![两者差别](./Assignment3/result/diff-Bilinear.png)
 
 - [ ] [Assignment 4](./Assignment4)
 

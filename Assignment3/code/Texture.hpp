@@ -30,5 +30,26 @@ public:
         return Eigen::Vector3f(color[0], color[1], color[2]);
     }
 
+    // 📖-10 实现双线性插值
+    Eigen::Vector3f getColorBilinear(float u, float v)
+    {
+        auto u_img = u * width;
+        auto v_img = (1 - v) * height;
+
+        auto ul = floor(u_img - 0.5)+0.5;
+        auto vl = floor(v_img - 0.5)+0.5;
+
+        auto color_lb = image_data.at<cv::Vec3b>(vl, ul);
+        auto color_lt = image_data.at<cv::Vec3b>(vl, ul+1.0);
+        auto color_rb = image_data.at<cv::Vec3b>(vl+1.0, ul);
+        auto color_rt = image_data.at<cv::Vec3b>(vl+1.0, ul+1.0);
+
+        auto color_b = color_lb + (v_img-vl) * (color_rb-color_lb);
+        auto color_t = color_lt + (v_img-vl) * (color_rt-color_lt);
+        auto color = color_b + (u_img-ul) * (color_t-color_b);
+
+        return Eigen::Vector3f(color[0], color[1], color[2]);
+    }
+
 };
 #endif //RASTERIZER_TEXTURE_H
