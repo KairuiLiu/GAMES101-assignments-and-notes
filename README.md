@@ -21,7 +21,7 @@ B 站回放: https://www.bilibili.com/video/BV1X7411F744
 - [x] [Lecture 9 Shading - 纹理](./note-lecture-09/README.md)
 - [x] [Lecture 10 Geometry](./note-lecture-10/README.md)
 - [x] [Lecture 11 Geometry - 曲线与曲面](./note-lecture-11/README.md)
-- [x] [Lecture 12 Geometry - 曲面](./note-lecture-12/README.md)
+- [ ] [Lecture 12 Geometry - 曲面](./note-lecture-12/README.md)
 - [ ] [Lecture 13](./note-lecture-13/README.md)
 - [ ] [Lecture 14](./note-lecture-14/README.md)
 - [ ] [Lecture 15](./note-lecture-15/README.md)
@@ -108,6 +108,14 @@ B 站回放: https://www.bilibili.com/video/BV1X7411F744
       ![两者差别](./Assignment3/result/diff-Bilinear.png)
 
 - [x] [Assignment 4](./Assignment4)
+
+    - 贝塞尔曲线多项式计算与模拟结果对比
+
+      ![结果对比](./Assignment4/result/diff-naive-decast.png)
+
+    - 加入反走样后效果(上到下: 反走样-模拟实现-函数实现)
+
+      ![加入反走样](./Assignment4/result/anti-decast-naive.png)
 
 - [ ] [Assignment 5](./Assignment5)
 
