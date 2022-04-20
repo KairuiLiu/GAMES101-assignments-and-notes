@@ -20,7 +20,7 @@ B 站回放: https://www.bilibili.com/video/BV1X7411F744
 - [x] [Lecture 8 Shading - 着色&管线&纹理](./note-lecture-08/README.md)
 - [x] [Lecture 9 Shading - 纹理](./note-lecture-09/README.md)
 - [x] [Lecture 10 Geometry](./note-lecture-10/README.md)
-- [ ] [Lecture 11](./note-lecture-11/README.md)
+- [x] [Lecture 11 Geometry - 曲线与曲面](./note-lecture-11/README.md)
 - [ ] [Lecture 12](./note-lecture-12/README.md)
 - [ ] [Lecture 13](./note-lecture-13/README.md)
 - [ ] [Lecture 14](./note-lecture-14/README.md)
