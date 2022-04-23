@@ -51,3 +51,8 @@ $$
 考虑光线从一个很小的表面辐射出, 并且在一个点上向四面八方投射其在单位立体角辐射出功率就是Radiance
 
 还可以分为Incident Radiance与Exiting Radiance, 分别表示射入与发出的能量
+
+可以这样理解
+
+- Irradiant: 单位面积而收到的功率
+- Radiance: 单位面积单位方向收到的功率
