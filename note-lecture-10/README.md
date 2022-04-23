@@ -1,6 +1,6 @@
-## Lecture 10 Geometry
+## Lecture 10 Geometry - 几何表示
 
-**几何分类**
+**几何表示分类**
 
 - 隐式几何(Implicit): 不直接定义点, 而定义点满足的条件(例如定义球上的点$x^2+y^2+z^2=1$). 
 
