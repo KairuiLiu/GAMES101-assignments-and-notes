@@ -2,7 +2,7 @@
 
 GAMES101-现代计算机图形学入门作业与笔记
 
-主讲: 闫令琪
+主讲: [闫令琪](https://sites.cs.ucsb.edu/~lingqi/)
 
 课程主页: https://games-cn.org/intro-graphics/
 
@@ -22,9 +22,9 @@ B 站回放: https://www.bilibili.com/video/BV1X7411F744
 - [x] [Lecture 10 Geometry](./note-lecture-10/README.md)
 - [x] [Lecture 11 Geometry - 曲线与曲面](./note-lecture-11/README.md)
 - [x] [Lecture 12 Geometry - 曲面操作与阴影](./note-lecture-12/README.md)
-- [ ] [Lecture 13 Ray Tracing - Whitted-Style光线追踪](./note-lecture-13/README.md)
-- [ ] [Lecture 14](./note-lecture-14/README.md)
-- [ ] [Lecture 15](./note-lecture-15/README.md)
+- [x] [Lecture 13 Ray Tracing - Whitted-Style光线追踪](./note-lecture-13/README.md)
+- [x] [Lecture 14 Ray Tracing - 辐射度量学](./note-lecture-14/README.md)
+- [x] [Lecture 15 Ray Tracing - 光线传播与全局光照](./note-lecture-15/README.md)
 - [ ] [Lecture 16](./note-lecture-16/README.md)
 - [ ] [Lecture 17](./note-lecture-17/README.md)
 - [ ] [Lecture 18](./note-lecture-18/README.md)
