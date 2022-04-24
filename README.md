@@ -28,7 +28,7 @@ B 站回放: https://www.bilibili.com/video/BV1X7411F744
 - [x] [Lecture 16 Ray Tracing - 蒙特卡洛路径追踪](./note-lecture-16/README.md)
 - [x] [Lecture 17 Materials and Appearances](./note-lecture-17/README.md)
 - [x] [Lecture 18 Materials and Appearances](./note-lecture-18/README.md)
-- [ ] [Lecture 19](./note-lecture-19/README.md)
+- [ ] [Lecture 19 Cameras, Lenses and Light Fields](./note-lecture-19/README.md)
 - [ ] [Lecture 20](./note-lecture-20/README.md)
 - [ ] [Lecture 21](./note-lecture-21/README.md)
 - [ ] [Lecture 22](./note-lecture-22/README.md)
