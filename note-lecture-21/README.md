@@ -1,4 +1,4 @@
-## Lecture 21 Animation
+## Lecture 21 Animation and Simulation
 
 动画实现方式: 关键帧动画, 物理模拟
 

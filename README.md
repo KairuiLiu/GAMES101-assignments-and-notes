@@ -30,8 +30,8 @@ B 站回放: https://www.bilibili.com/video/BV1X7411F744
 - [x] [Lecture 18 Materials and Appearances](./note-lecture-18/README.md)
 - [x] [Lecture 19 Cameras Lenses](./note-lecture-19/README.md)
 - [x] [Lecture 20 Light Fields, Color and Perception](./note-lecture-20/README.md)
-- [x] [Lecture 21 Animation](./note-lecture-21/README.md)
-- [x] [Lecture 22 Animation](./note-lecture-22/README.md)
+- [x] [Lecture 21 Animation and Simulation](./note-lecture-21/README.md)
+- [x] [Lecture 22 Animation and Simulation](./note-lecture-22/README.md)
 - [x] [合并版](https://liukairui.me/article/GAMES-101现代计算机图形学入门笔记/)
 
 ### 作业
@@ -125,3 +125,5 @@ B 站回放: https://www.bilibili.com/video/BV1X7411F744
 - [ ] [Assignment 7](./Assignment7)
 
 - [ ] [Assignment 8](./Assignment8)
+
+- [ ] [Final Project - 基于Three.js的Minecraft实现](https://github.com/KairuiLiu/ThreeCraft)
