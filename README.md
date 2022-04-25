@@ -1,6 +1,6 @@
 # GAMES101-assignments-and-notes
 
-GAMES101-现代计算机图形学入门作业与笔记
+🖼️GAMES101-现代计算机图形学入门作业与笔记
 
 主讲: [闫令琪](https://sites.cs.ucsb.edu/~lingqi/)
 
@@ -30,8 +30,9 @@ B 站回放: https://www.bilibili.com/video/BV1X7411F744
 - [x] [Lecture 18 Materials and Appearances](./note-lecture-18/README.md)
 - [x] [Lecture 19 Cameras Lenses](./note-lecture-19/README.md)
 - [x] [Lecture 20 Light Fields, Color and Perception](./note-lecture-20/README.md)
-- [ ] [Lecture 21 Animation](./note-lecture-21/README.md)
-- [ ] [Lecture 22 Animation](./note-lecture-22/README.md)
+- [x] [Lecture 21 Animation](./note-lecture-21/README.md)
+- [x] [Lecture 22 Animation](./note-lecture-22/README.md)
+- [x] [合并版](https://liukairui.me/article/GAMES-101现代计算机图形学入门笔记/)
 
 ### 作业
 
