@@ -21,6 +21,7 @@
      - 对于引入新顶点(中点): $P = 3/8 * (A + B) + 1/8 * (C + D)$, $A, B$为所在边的顶点. $CD$为相邻两个三角形对边顶点
 
      -  对于原有顶点: 
+      
        $$
        \begin{align}
        P & = (1 - n*u) * original\_position + u * neighbo\_position\_sum \\
@@ -30,10 +31,10 @@
        3/16& \ &n = 3\\
        3/8n& \ &otherwise
        \end{matrix}
-       
        \right.
        \end{align}
        $$
+
        注意这里是针对一个原有顶点计算的, 计算相邻点位置的时候$n$还是被调整点度数, 而不是相邻点的度数
 
      ![](./img/12-2.png)

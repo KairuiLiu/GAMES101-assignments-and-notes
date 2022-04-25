@@ -231,7 +231,7 @@
   $$
   也有现成的罗德里格旋转公式(Rodrigues' rotation formula)计算绕任意过原点向量($n$)旋转公式
   $$
-  R(\bold{n},\alpha) = \cos(\alpha)\bold{I} + (1-\cos(\alpha))\bold{nn}^T+\sin(\alpha)\left(\begin{matrix}
+  R(\vec{n},\alpha) = \cos(\alpha)\vec{I} + (1-\cos(\alpha))\vec{n}\vec{n}^T+\sin(\alpha)\left(\begin{matrix}
   0&-n_z&n_y\\n_z&0&-n_x\\-n_y&n_x&0
   \end{matrix}\right)
   $$
@@ -272,11 +272,11 @@
     $$
     整理成矩阵形式就是
     $$
-    v_{rot} = R(\bold{n},\alpha) v
+    v_{rot} = R(\vec{n},\alpha) v
     $$
   
     $$
-    R(\bold{k},\alpha) = \cos(\alpha)\bold{I} + (1-\cos(\alpha))\bold{kk}^T+\sin(\alpha)\left(\begin{matrix}
+    R(\vec{k},\alpha) = \cos(\alpha)\vec{I} + (1-\cos(\alpha))\vec{k}\vec{k}^T+\sin(\alpha)\left(\begin{matrix}
     0&-k_z&k_y\\k_z&0&-k_x\\-k_y&k_x&0
     \end{matrix}\right)
     $$

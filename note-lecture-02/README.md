@@ -50,7 +50,7 @@
     $$
     注意矩阵表示时$A^*$是一个整体表示dual matrix, 不要当成乘号
 
-  - 不满足交换率($\vec{a} \times \vec{b} = -\vec{b} \times \vec{a} $), 满足分配率
+  - 不满足交换率( $\vec{a} \times \vec{b} = - \vec{b} \times \vec{a}$ ), 满足分配率
 
   - 应用: 
 

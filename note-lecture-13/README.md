@@ -70,9 +70,9 @@
   - Moller Trumbore算法
 
     就是将上面步骤与重心坐标判断点与三角形位置组合在一起
+
     $$
     \begin{align}
-    
     \left[\begin{matrix}
     t\\b_1\\b_2
     \end{matrix}\right]=\frac{1}{S_1\cdot E_1}
@@ -81,7 +81,9 @@
     \end{matrix}\right]
     \end{align}
     $$
+
     其中
+    
     $$
     E_1 = P_1-P_0\\
     E_2 = P_2-P_0\\

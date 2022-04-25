@@ -25,7 +25,7 @@
 
 - 使用罗德格旋转公式完成附加题
   $$
-  R(\bold{n},\alpha) = \cos(\alpha)\bold{I} + (1-\cos(\alpha))\bold{nn}^T+\sin(\alpha)\left(\begin{matrix}
+  R(\vec{n},\alpha) = \cos(\alpha)\vec{I} + (1-\cos(\alpha))\vec{n}\vec{n}^T+\sin(\alpha)\left(\begin{matrix}
   0&-n_z&n_y\\n_z&0&-n_x\\-n_y&n_x&0
   \end{matrix}\right)
   $$
