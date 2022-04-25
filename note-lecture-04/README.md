@@ -122,23 +122,3 @@ $$
 M_{persp\to ortho} = \left[\begin{matrix}n&0&0&0\\0&n&0&0\\0&0&n+f&-nf\\0&0&1&0\end{matrix}\right]
 $$
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
