@@ -118,12 +118,22 @@ B 站回放: https://www.bilibili.com/video/BV1X7411F744
 
       ![加入反走样](./Assignment4/result/anti-decast-naive.png)
 
-- [ ] [Assignment 5](./Assignment5)
+- [x] [Assignment 5](./Assignment5)
 
-- [ ] [Assignment 6](./Assignment6)
+    - ![结果](./Assignment5/result/binary.png)
 
-- [ ] [Assignment 7](./Assignment7)
+- [x] [Assignment 6](./Assignment6)
 
-- [ ] [Assignment 8](./Assignment8)
+    - BVH加速结构(1467s)
+
+      ![BVH](./Assignment6/result/BVH.png)
+      
+    - SAH加速结构(1386s)
+
+      ![SAH](./Assignment6/result/SAH.png)
+
+- [x] [Assignment 7](./Assignment7)
+
+- [x] [Assignment 8](./Assignment8)
 
 - [ ] [Final Project - 基于Three.js的Minecraft实现](https://github.com/KairuiLiu/ThreeCraft)
