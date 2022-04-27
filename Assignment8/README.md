@@ -1,4 +1,4 @@
-## Assignment 6
+## Assignment 8
 
 使用显/隐模式欧拉与显式Verlet方法实现质点弹簧系统
 

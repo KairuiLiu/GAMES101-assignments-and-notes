@@ -1,17 +1,17 @@
-## Assignment 6
+## Assignment 7
 
-使用显/隐模式欧拉与显式Verlet方法实现质点弹簧系统
+实现路径追踪
 
 **结果**
 
-- 显式欧拉方法, 不添加阻尼~~(闪电五连鞭)~~
+- cornellbox光线追踪(SPP = 128, cost = 20min)
 
-  ![Euler-without-dapming](./result/Euler-without-dapming.gif)
-  
-- 显式欧拉方法, 添加阻尼
+  ![](./img/cornellbox-SPP-128.png)
 
-  ![Euler-with-dapming](./result/Euler-with-dapming.gif)
-  
-- 隐式欧拉方法与Verlet方法
+- cornellbox光线追踪(SPP = 1024, cost = min)
 
-  ![Euler-without-dapming](./result/Implicii-Euler-with-dapming-verlet.gif)
+  ![](./img/cornellbox-SPP-128.png)
+
+- cornellbox光线追踪(SPP = 16384, cost = min)
+
+  ![](./img/cornellbox-SPP-128.png)
