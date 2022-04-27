@@ -120,7 +120,9 @@ B 站回放: https://www.bilibili.com/video/BV1X7411F744
 
 - [x] [Assignment 5](./Assignment5)
 
-    - ![结果](./Assignment5/result/binary.png)
+    - Prime Ray生成, Prime Ray与三角形相交检测
+
+      ![结果](./Assignment5/result/binary.png)
 
 - [x] [Assignment 6](./Assignment6)
 
@@ -134,6 +136,30 @@ B 站回放: https://www.bilibili.com/video/BV1X7411F744
 
 - [x] [Assignment 7](./Assignment7)
 
+    - cornellbox光线追踪(SPP = 256, cost = 93min)
+
+      ![](./Assignment7/result/cornellbox-SPP-256.png)
+
+    - cornellbox光线追踪(SPP = 1024, cost = 9h ETA)
+
+      ![](./Assignment7/result/cornellbox-SPP-1024.png)
+
+    - cornellbox光线追踪(SPP = 16384, cost = 144h ETA)
+
+      ![](./Assignment7/result/cornellbox-SPP-16384.png)
+
 - [x] [Assignment 8](./Assignment8)
+
+    - 显式欧拉方法, 不添加阻尼~~(闪电五连鞭)~~
+
+      ![Euler-without-dapming](./Assignment8/result/Euler-without-dapming.gif)
+      
+    - 显式欧拉方法, 添加阻尼
+
+      ![Euler-with-dapming](./Assignment8/result/Euler-with-dapming.gif)
+      
+    - 隐式欧拉方法与Verlet方法
+
+      ![Euler-without-dapming](./Assignment8/result/Implicii-Euler-with-dapming-verlet.gif)
 
 - [ ] [Final Project - 基于Three.js的Minecraft实现](https://github.com/KairuiLiu/ThreeCraft)

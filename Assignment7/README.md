@@ -1,17 +1,21 @@
 ## Assignment 7
 
-实现路径追踪
+实现路径追踪与微表面
+
+代码中Scene分类与参数解释
+
+![](./result/Scene.png)
 
 **结果**
 
-- cornellbox光线追踪(SPP = 128, cost = 20min)
+- cornellbox光线追踪(SPP = 256, cost = 93min)
 
-  ![](./img/cornellbox-SPP-128.png)
+  ![](./result/cornellbox-SPP-256.png)
 
-- cornellbox光线追踪(SPP = 1024, cost = min)
+- cornellbox光线追踪(SPP = 1024, cost = 9h ETA)
 
-  ![](./img/cornellbox-SPP-128.png)
+  ![](./result/cornellbox-SPP-1024.png)
 
-- cornellbox光线追踪(SPP = 16384, cost = min)
+- cornellbox光线追踪(SPP = 16384, cost = 144h ETA)
 
-  ![](./img/cornellbox-SPP-128.png)
+  ![](./result/cornellbox-SPP-16384.png)
