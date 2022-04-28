@@ -140,7 +140,7 @@ B 站回放: https://www.bilibili.com/video/BV1X7411F744
 
       ![](./Assignment7/result/cornellbox-SPP-256.png)
 
-    - cornellbox光线追踪(SPP = 1024, cost = 9h ETA)
+    - cornellbox光线追踪(SPP = 1024, cost = 11h)
 
       ![](./Assignment7/result/cornellbox-SPP-1024.png)
 
