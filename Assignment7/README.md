@@ -16,6 +16,6 @@
 
   ![](./result/cornellbox-SPP-1024.png)
 
-- cornellbox光线追踪(SPP = 16384, cost = 144h ETA)
+- cornellbox光线追踪(SPP = 16384, cost = 177h)
 
   ![](./result/cornellbox-SPP-16384.png)
