@@ -162,4 +162,4 @@ B 站回放: https://www.bilibili.com/video/BV1X7411F744
 
       ![Euler-without-dapming](./Assignment8/result/Implicii-Euler-with-dapming-verlet.gif)
 
-- [ ] [Final Project - 基于Three.js的Minecraft实现](https://github.com/KairuiLiu/ThreeCraft)
+- [x] [Final Project - 基于Three.js的Minecraft实现](https://github.com/KairuiLiu/ThreeCraft)
